@@ -8,6 +8,10 @@ function addOption(txt){
 	aaa.setAttribute('value', txt); //Setattribute is a sanitizer, but not for the full flow. 
 	
 	aaa.innerHTML = txt //This is vulnerable!
+	aaa.innerHTML = txt //This is vulnerable!
+	aaa.innerHTML = txt //This is vulnerable!
+	aaa.innerHTML = txt //This is vulnerable!
+	aaa.innerHTML = txt //This is vulnerable!
 
 	var dd = document.getElementById("xpto")
 	dd.appendChild(aaa)
