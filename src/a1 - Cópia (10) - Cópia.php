@@ -1,5 +1,11 @@
 <?php
 
+// Enforce HTTPS by sending HTTP Strict Transport Security header (HSTS)
+// This prevents protocol downgrade attacks and cookie hijacking over HTTP
+if (PHP_SAPI !== 'cli') {
+    header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
+}
+
 if (PHP_SAPI === 'cli') {
     parse_str(implode('&', array_slice($argv, 1)), $_GET);
 }
