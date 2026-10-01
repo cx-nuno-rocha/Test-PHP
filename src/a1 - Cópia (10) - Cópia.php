@@ -13,5 +13,5 @@ $sql = 'SELECT * FROM employees WHERE employeeId = ' . $_GET['id'];
 foreach ($file_db->query($sql) as $row) {
     $employee = $row['LastName'] . " - " . $row['Email'] . "\n";
 
-    echo $employee;
+    echo htmlspecialchars($employee, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 }
