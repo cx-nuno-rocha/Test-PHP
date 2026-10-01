@@ -8,9 +8,12 @@ $file_db = new PDO('sqlite:../database/database.sqlite');
 
 if (NULL == $_GET['id']) $_GET['id'] = 1;
 
-$sql = 'SELECT * FROM employees WHERE employeeId = ' . $_GET['id'];
+// Use a prepared statement with a bound parameter to prevent SQL injection.
+$stmt = $file_db->prepare('SELECT * FROM employees WHERE employeeId = :id');
+$stmt->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+$stmt->execute();
 
-foreach ($file_db->query($sql) as $row) {
+foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
     $employee = $row['LastName'] . " - " . $row['Email'] . "\n";
 
     echo htmlspecialchars($employee, ENT_QUOTES | ENT_HTML5, 'UTF-8');
